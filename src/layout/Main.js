@@ -21,8 +21,8 @@ const Main = () => {
                         <RightSideNav />
                     </div>
                 </div>
+                <Footer />
             </div>
-            <Footer /
         </>
     );
 };
