@@ -9,20 +9,20 @@ const Main = () => {
     return (
         <>
             <Header />
-            <div className="md:mx-20">
-                <div className="grid grid-cols-12">
-                    <div className="col-span-2">
+            <div className="md:mx-12 lg:mx-20">
+                <div className="grid lg:grid-cols-12 gap-5">
+                    <div className="lg:col-span-2 lg:order-1 order-2">
                         <LeftSideNav />
                     </div>
-                    <div className="col-span-7 bg-red-200">
+                    <div className="lg:col-span-7 lg:order-2 order-1">
                         <Outlet />
                     </div>
-                    <div className="col-span-3 bg-green-200">
+                    <div className="lg:col-span-3 order-3">
                         <RightSideNav />
                     </div>
                 </div>
-                <Footer />
             </div>
+            <Footer />
         </>
     );
 };
