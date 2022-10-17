@@ -11,7 +11,7 @@ const Main = () => {
             <Header />
             <div className="md:mx-20">
                 <div className="grid grid-cols-12">
-                    <div className="col-span-2 bg-blue-200">
+                    <div className="col-span-2">
                         <LeftSideNav />
                     </div>
                     <div className="col-span-7 bg-red-200">
