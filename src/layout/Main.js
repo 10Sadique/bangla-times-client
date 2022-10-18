@@ -10,14 +10,14 @@ const Main = () => {
         <>
             <Header />
             <div className="md:mx-12 lg:mx-20">
-                <div className="grid lg:grid-cols-12 gap-5">
-                    <div className="lg:col-span-2 lg:order-1 order-2">
+                <div className="grid gap-5 lg:grid-cols-12">
+                    <div className="order-2 hidden md:block lg:col-span-2 lg:order-1">
                         <LeftSideNav />
                     </div>
-                    <div className="lg:col-span-7 lg:order-2 order-1">
+                    <div className="order-1 lg:col-span-7 lg:order-2">
                         <Outlet />
                     </div>
-                    <div className="lg:col-span-3 order-3">
+                    <div className="order-3 lg:col-span-3">
                         <RightSideNav />
                     </div>
                 </div>

@@ -13,10 +13,10 @@ const LeftSideNav = () => {
 
     return (
         <div>
-            <h4 className="font-bold w-full text-center text-xl pt-5">
+            <h4 className="w-full py-5 text-xl font-bold text-center">
                 All Categories
             </h4>
-            <ul className="menu bg-base-100 w-full h-full p-2 rounded-box text-blue-700">
+            <ul className="w-full h-full p-2 text-blue-700 menu bg-base-100 rounded-box">
                 {categories.map((category) => (
                     <li key={category.id}>
                         <Link to={`/categories/${category.id}`}>

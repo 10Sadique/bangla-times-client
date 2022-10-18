@@ -1,22 +1,29 @@
 import React from 'react';
+import { Carousel } from 'react-responsive-carousel';
+import Brand1 from '../assets/Brands/Brand1.png';
+import Brand2 from '../assets/Brands/Brand2.png';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 const BrandCarousel = () => {
     return (
-        <div className="carousel carousel-center w-full bg-neutral rounded-xl">
-            <div id="item1" className="carousel-item">
+        <div className="rounded-lg">
+            <Carousel
+                showThumbs={false}
+                infiniteLoop={true}
+                interval={4000}
+                autoPlay={true}
+            >
                 <img
-                    src="https://placeimg.com/250/180/arch"
-                    className="rounded-lg"
+                    className="object-cover w-full h-full rounded-lg"
+                    src={Brand1}
                     alt=""
                 />
-            </div>
-            <div id="item2" className="carousel-item">
                 <img
-                    src="https://placeimg.com/250/180/arch"
-                    className="rounded-lg"
-                    alt=";"
+                    className="object-cover w-full h-full rounded-lg"
+                    src={Brand2}
+                    alt=""
                 />
-            </div>
+            </Carousel>
         </div>
     );
 };
