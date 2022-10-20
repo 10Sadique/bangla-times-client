@@ -1,5 +1,5 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, ScrollRestoration } from 'react-router-dom';
 import Footer from '../pages/Shared/Footer';
 import Header from '../pages/Shared/Header';
 import LeftSideNav from '../pages/Shared/LeftSideNav';
@@ -16,6 +16,7 @@ const Main = () => {
                     </div>
                     <div className="order-1 lg:col-span-7 lg:order-2">
                         <Outlet />
+                        <ScrollRestoration />
                     </div>
                     <div className="order-3 lg:col-span-3">
                         <RightSideNav />

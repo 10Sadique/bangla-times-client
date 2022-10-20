@@ -4,15 +4,31 @@ import Category from '../pages/Category';
 import Home from '../pages/Home';
 import News from '../pages/News';
 
+const newsLoader = () => {
+    return fetch('http://localhost:5000/news');
+};
+
 export const router = createBrowserRouter([
     {
         path: '/',
         element: <Main />,
         children: [
-            { path: '/', element: <Home /> },
-            { path: '/home', element: <Home /> },
-            { path: '/news/:id', element: <News /> },
-            { path: '/categories/:id', element: <Category /> },
+            { path: '/', element: <Home />, loader: newsLoader },
+            { path: '/home', element: <Home />, loader: newsLoader },
+            {
+                path: '/news/:id',
+                element: <News />,
+                loader: ({ params }) => {
+                    return fetch(`http://localhost:5000/news/${params.id}`);
+                },
+            },
+            {
+                path: '/category/:id',
+                element: <Category />,
+                loader: ({ params }) => {
+                    return fetch(`http://localhost:5000/category/${params.id}`);
+                },
+            },
         ],
     },
 ]);

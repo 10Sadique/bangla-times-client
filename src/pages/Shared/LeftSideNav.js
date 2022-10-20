@@ -19,7 +19,7 @@ const LeftSideNav = () => {
             <ul className="w-full h-full p-2 text-blue-700 menu bg-base-100 rounded-box">
                 {categories.map((category) => (
                     <li key={category.id}>
-                        <Link to={`/categories/${category.id}`}>
+                        <Link to={`/category/${category.id}`}>
                             {category.name}
                         </Link>
                     </li>
