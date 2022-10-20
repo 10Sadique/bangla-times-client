@@ -1,4 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
+import SignIn from '../components/SignIn';
+import SignUp from '../components/SignUp';
 import Main from '../layout/Main';
 import Category from '../pages/Category';
 import Home from '../pages/Home';
@@ -29,6 +31,8 @@ export const router = createBrowserRouter([
                     return fetch(`http://localhost:5000/category/${params.id}`);
                 },
             },
+            { path: '/signin', element: <SignIn /> },
+            { path: '/signup', element: <SignUp /> },
         ],
     },
 ]);

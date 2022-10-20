@@ -14,7 +14,7 @@ const Main = () => {
                     <div className="order-2 hidden md:block lg:col-span-2 lg:order-1">
                         <LeftSideNav />
                     </div>
-                    <div className="order-1 lg:col-span-7 lg:order-2">
+                    <div className="order-1 mx-5 lg:col-span-7 lg:order-2">
                         <Outlet />
                         <ScrollRestoration />
                     </div>

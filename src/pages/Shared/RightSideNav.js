@@ -1,4 +1,5 @@
-import React from 'react';
+import { GoogleAuthProvider } from 'firebase/auth';
+import React, { useContext } from 'react';
 import {
     FaGoogle,
     FaGithub,
@@ -9,12 +10,30 @@ import {
 } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import BrandCarousel from '../../components/BrandCarousel';
+import { AuthContext } from '../../contexts/AuthProvider';
 
 const RightSideNav = () => {
+    const googleProvider = new GoogleAuthProvider();
+    const { googleSignIn } = useContext(AuthContext);
+
+    const handleGoogleSignIn = () => {
+        googleSignIn(googleProvider)
+            .then((result) => {
+                const user = result.user;
+                console.log(user);
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+    };
+
     return (
         <div className="p-4">
             <div className="w-full space-y-1">
-                <button className="w-full space-x-2 text-blue-600 normal-case border-2 border-blue-600 btn btn-outline hover:bg-blue-600 hover:border-blue-600">
+                <button
+                    onClick={handleGoogleSignIn}
+                    className="w-full space-x-2 text-blue-600 normal-case border-2 border-blue-600 btn btn-outline hover:bg-blue-600 hover:border-blue-600"
+                >
                     <FaGoogle className="w-5 h-5" />
                     <span>Login with Google</span>
                 </button>

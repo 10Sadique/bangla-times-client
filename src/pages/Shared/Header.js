@@ -1,9 +1,30 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { FaBars } from 'react-icons/fa';
+import { FaBars, FaUser } from 'react-icons/fa';
 import LeftSideNav from './LeftSideNav';
+import { AuthContext } from '../../contexts/AuthProvider';
 
 const Header = () => {
+    const { user, logOut, loading } = useContext(AuthContext);
+
+    const handleSignOut = () => {
+        logOut()
+            .then(() => {
+                console.log('logged out');
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+    };
+
+    if (loading) {
+        return (
+            <div>
+                <button className="btn btn-primary loading">loading</button>
+            </div>
+        );
+    }
+
     return (
         <div>
             <div className="text-white bg-blue-700 navbar">
@@ -37,18 +58,43 @@ const Header = () => {
                         <Link className="btn btn-ghost" to={`/home`}>
                             Home
                         </Link>
-                        <Link className="btn btn-ghost" to={`/home`}>
-                            Category
-                        </Link>
-                        <Link className="btn btn-ghost" to={`/home`}>
+                        <Link className="btn btn-ghost" to={`/category/08`}>
                             News
                         </Link>
+                        {user ? (
+                            <div
+                                onClick={handleSignOut}
+                                className="btn btn-ghost"
+                            >
+                                Sign Out
+                            </div>
+                        ) : (
+                            <div>
+                                <Link className="btn btn-ghost" to={`/signin`}>
+                                    Sign In
+                                </Link>
+                                <Link className="btn btn-ghost" to={`/signup`}>
+                                    Sign Up
+                                </Link>
+                            </div>
+                        )}
                     </div>
                 </div>
                 <div className="navbar-end">
-                    <Link className="text-blue-700 transition-all duration-300 bg-gray-100 border-0 shadow-md btn hover:bg-gray-200 shadow-gray-100/20">
-                        Get started
-                    </Link>
+                    <p className="mr-3 font-semibold">
+                        {user?.displayName ? user.displayName : ''}
+                    </p>
+                    <div className="flex items-center justify-center w-10 h-10 mr-3 text-indigo-600 bg-blue-200 rounded-full">
+                        {!loading && user?.photoURL ? (
+                            <img
+                                className="w-full rounded-full"
+                                src={user.photoURL}
+                                alt=""
+                            />
+                        ) : (
+                            <FaUser />
+                        )}
+                    </div>
                 </div>
             </div>
         </div>
