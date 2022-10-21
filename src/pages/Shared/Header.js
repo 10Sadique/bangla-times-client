@@ -17,13 +17,13 @@ const Header = () => {
             });
     };
 
-    if (loading) {
-        return (
-            <div>
-                <button className="btn btn-primary loading">loading</button>
-            </div>
-        );
-    }
+    // if (loading) {
+    //     return (
+    //         <div>
+    //             <button className="btn btn-primary loading">loading</button>
+    //         </div>
+    //     );
+    // }
 
     return (
         <div>

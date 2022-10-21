@@ -1,9 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthProvider';
 
 const SignIn = () => {
     const { signIn } = useContext(AuthContext);
+    const [error, setError] = useState('');
 
     const navigate = useNavigate();
     // const location = useLocation();
@@ -21,10 +22,13 @@ const SignIn = () => {
                 const user = result.user;
                 console.log(user);
                 form.reset();
+                setError('');
                 navigate('/');
             })
             .catch((err) => {
                 console.error(err);
+
+                setError(err.message);
             });
     };
 
@@ -59,6 +63,11 @@ const SignIn = () => {
                             className="input input-bordered"
                         />
                     </div>
+                    {error && (
+                        <div className="mt-5 text-red-500">
+                            <p>{error}</p>
+                        </div>
+                    )}
                     <div className="mt-6 form-control">
                         <button type="submit" className="btn btn-primary">
                             Sign In
