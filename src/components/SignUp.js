@@ -1,42 +1,78 @@
 import React, { useContext, useState } from 'react';
+import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../contexts/AuthProvider';
 
 const SignUp = () => {
-    const { createUser, setName } = useContext(AuthContext);
-    const [error, setError] = useState('');
+    const { createUser, updateUserProfile, verifyEmail } =
+        useContext(AuthContext);
 
-    // const location = useLocation();
+    const [error, setError] = useState('');
+    const [accepted, setAccepted] = useState(false);
+
+    const location = useLocation();
     const navigate = useNavigate();
-    // const to = location.state?.from?.pathname || '/';
+    const to = location.state?.from?.pathname || '/';
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const form = e.target;
         const name = form.fullname.value;
+        const image = form.image.value;
         const email = form.email.value;
         const password = form.password.value;
 
-        // console.log(name, email, password);
+        // console.log(name, email, password, image);
+
+        const profile = {
+            displayName: name,
+            photoURL: image,
+        };
 
         createUser(email, password)
             .then((result) => {
                 const user = result.user;
-                setName(name)
-                    .then(() => {
-                        console.log('Name added.');
-                    })
-                    .catch((err) => {
-                        console.error(err);
-                    });
-                form.reset();
                 setError('');
-                navigate('/');
+                form.reset();
+
+                handleUpadateProfie(profile);
+                handleEmailVerificaton();
+                toast('Please, verify your email.', {
+                    icon: 'ℹ',
+                });
+
+                console.log(user);
+                navigate(to, { replace: true });
             })
             .catch((err) => {
                 console.error(err);
                 setError(err.message);
             });
+    };
+
+    const handleUpadateProfie = (profile) => {
+        updateUserProfile(profile)
+            .then(() => {
+                console.log('Name added.');
+                console.log('Image added.');
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+    };
+
+    const handleEmailVerificaton = () => {
+        verifyEmail()
+            .then(() => {
+                console.log('Verfication Email Sent.');
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+    };
+
+    const handleCheckBox = () => {
+        setAccepted(!accepted);
     };
 
     return (
@@ -55,6 +91,17 @@ const SignUp = () => {
                             type="text"
                             name="fullname"
                             placeholder="Name"
+                            className="input input-bordered"
+                        />
+                    </div>
+                    <div className="form-control">
+                        <label className="label">
+                            <span className="label-text">Image URL</span>
+                        </label>
+                        <input
+                            type="text"
+                            name="image"
+                            placeholder="Image URL"
                             className="input input-bordered"
                         />
                     </div>
@@ -87,9 +134,32 @@ const SignUp = () => {
                             <p>{error}</p>
                         </div>
                     )}
+                    <div onClick={handleCheckBox} className="mt-3 form-control">
+                        <label className="flex items-center gap-3 cursor-pointer">
+                            <input
+                                type="checkbox"
+                                // checked
+                                className="checkbox checkbox-primary checkbox-sm"
+                            />
+                            <span className="flex items-center gap-1 label-text">
+                                Accept our
+                                <Link
+                                    to={`/terms`}
+                                    className="text-indigo-600 underline"
+                                >
+                                    Terms and Conditions
+                                </Link>
+                                .
+                            </span>
+                        </label>
+                    </div>
                     <div className="mt-6 form-control">
-                        <button type="submit" className="btn btn-primary">
-                            Sign In
+                        <button
+                            disabled={!accepted}
+                            type="submit"
+                            className="btn btn-primary"
+                        >
+                            Sign Up
                         </button>
                     </div>
                     <div className="flex items-center gap-2 mx-auto mt-3">

@@ -1,10 +1,13 @@
 import { createBrowserRouter } from 'react-router-dom';
 import SignIn from '../components/SignIn';
 import SignUp from '../components/SignUp';
+import TermsAndConditions from '../components/TermsAndConditions';
 import Main from '../layout/Main';
 import Category from '../pages/Category';
 import Home from '../pages/Home';
 import News from '../pages/News';
+import Profile from '../pages/others/Profile';
+import PrivateRoute from './PrivateRoute';
 
 const newsLoader = () => {
     return fetch('http://localhost:5000/news');
@@ -19,7 +22,11 @@ export const router = createBrowserRouter([
             { path: '/home', element: <Home />, loader: newsLoader },
             {
                 path: '/news/:id',
-                element: <News />,
+                element: (
+                    <PrivateRoute>
+                        <News />
+                    </PrivateRoute>
+                ),
                 loader: ({ params }) => {
                     return fetch(`http://localhost:5000/news/${params.id}`);
                 },
@@ -33,6 +40,15 @@ export const router = createBrowserRouter([
             },
             { path: '/signin', element: <SignIn /> },
             { path: '/signup', element: <SignUp /> },
+            { path: '/terms', element: <TermsAndConditions /> },
+            {
+                path: '/profile',
+                element: (
+                    <PrivateRoute>
+                        <Profile />
+                    </PrivateRoute>
+                ),
+            },
         ],
     },
 ]);

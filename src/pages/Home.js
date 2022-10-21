@@ -9,13 +9,13 @@ const Home = () => {
 
     // console.log(news);
 
-    if (loading) {
-        return (
-            <div className="my-10">
-                <button className="btn btn-primary loading">loading</button>
-            </div>
-        );
-    }
+    // if (loading) {
+    //     return (
+    //         <div className="my-10">
+    //             <button className="btn btn-primary loading">loading</button>
+    //         </div>
+    //     );
+    // }
 
     return (
         <div>

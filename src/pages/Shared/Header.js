@@ -81,13 +81,18 @@ const Header = () => {
                     </div>
                 </div>
                 <div className="navbar-end">
-                    <p className="mr-3 font-semibold">
-                        {user?.displayName ? user.displayName : ''}
-                    </p>
-                    <div className="flex items-center justify-center w-10 h-10 mr-3 text-indigo-600 bg-blue-200 rounded-full">
+                    {user?.displayName && (
+                        <Link
+                            to={`/profile`}
+                            className="mr-3 font-semibold btn btn-ghost"
+                        >
+                            {user.displayName}
+                        </Link>
+                    )}
+                    <div className="flex items-center justify-center w-10 h-10 mr-3 overflow-hidden text-indigo-600 bg-blue-200 rounded-full">
                         {!loading && user?.photoURL ? (
                             <img
-                                className="w-full rounded-full"
+                                className="object-cover w-full h-full"
                                 src={user.photoURL}
                                 alt=""
                             />

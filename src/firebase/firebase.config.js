@@ -5,12 +5,12 @@ import { initializeApp } from 'firebase/app';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: 'AIzaSyAmfv0txFUMiBXIeOnpd4jmZsMepoUiQNU',
-    authDomain: 'bangla-times-news.firebaseapp.com',
-    projectId: 'bangla-times-news',
-    storageBucket: 'bangla-times-news.appspot.com',
-    messagingSenderId: '290942577671',
-    appId: '1:290942577671:web:0d66b6e1487329c0684ea2',
+    apiKey: process.env.REACT_APP_apiKey,
+    authDomain: process.env.REACT_APP_authDomain,
+    projectId: process.env.REACT_APP_projectId,
+    storageBucket: process.env.REACT_APP_storageBucket,
+    messagingSenderId: process.env.REACT_APP_messagingSenderId,
+    appId: process.env.REACT_APP_appId,
 };
 
 // Initialize Firebase

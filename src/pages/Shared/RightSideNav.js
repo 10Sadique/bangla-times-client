@@ -8,7 +8,7 @@ import {
     FaTwitter,
     FaTwitch,
 } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import BrandCarousel from '../../components/BrandCarousel';
 import { AuthContext } from '../../contexts/AuthProvider';
 
@@ -16,11 +16,16 @@ const RightSideNav = () => {
     const googleProvider = new GoogleAuthProvider();
     const { googleSignIn } = useContext(AuthContext);
 
+    const location = useLocation();
+    const navigate = useNavigate();
+    const to = location.state?.from?.pathname || '/';
+
     const handleGoogleSignIn = () => {
         googleSignIn(googleProvider)
             .then((result) => {
                 const user = result.user;
                 console.log(user);
+                navigate(to, { replace: true });
             })
             .catch((err) => {
                 console.error(err);
