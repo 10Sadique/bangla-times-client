@@ -10,7 +10,7 @@ import Profile from '../pages/others/Profile';
 import PrivateRoute from './PrivateRoute';
 
 const newsLoader = () => {
-    return fetch('http://localhost:5000/news');
+    return fetch('https://bangla-times-server.vercel.app/news');
 };
 
 export const router = createBrowserRouter([
@@ -28,14 +28,18 @@ export const router = createBrowserRouter([
                     </PrivateRoute>
                 ),
                 loader: ({ params }) => {
-                    return fetch(`http://localhost:5000/news/${params.id}`);
+                    return fetch(
+                        `https://bangla-times-server.vercel.app/news/${params.id}`
+                    );
                 },
             },
             {
                 path: '/category/:id',
                 element: <Category />,
                 loader: ({ params }) => {
-                    return fetch(`http://localhost:5000/category/${params.id}`);
+                    return fetch(
+                        `https://bangla-times-server.vercel.app/category/${params.id}`
+                    );
                 },
             },
             { path: '/signin', element: <SignIn /> },
